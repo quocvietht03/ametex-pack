@@ -1,0 +1,7 @@
+{
+    "require": {
+        "scssphp/scssphp": "^1.0",
+        "htmlburger/carbon-fields-plugin": "^3.2",
+        "htmlburger/carbon-fields": "^3.2"
+    }
+}
