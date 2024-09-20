@@ -19,7 +19,7 @@
 
         .__item {
             border: solid 1px #eee;
-            border-top: 3px solid var(--apack-color-primary);
+            border-top: 3px solid var(--e-global-color-primary);
             background: #FFF;
             position: relative;
             height: 100%;
@@ -103,11 +103,11 @@
                     padding: 10px;
                     border: solid 1px #eee;
                     text-align: center;
-                    color: var(--apack-color-accent);
+                    color: var(--e-global-color-accent);
 
                     &:hover {
-                        background: var(--apack-color-accent);
-                        border-color: var(--apack-color-accent);
+                        background: var(--e-global-color-accent);
+                        border-color: var(--e-global-color-accent);
                         color: #FFF;
                     }
                 }

@@ -59,30 +59,41 @@ if( ! function_exists( 'apack_elementor_scheme_variables' ) ) {
      *
      */
     function apack_elementor_scheme_variables() {
-
         if( ! defined( 'ELEMENTOR_VERSION' ) ) return;
 
         $schemes = Elementor\Plugin::$instance->schemes_manager->get_registered_schemes_data();
+        
+        if( ! isset( $schemes['color'], $schemes['typography'] ) ) return;
+    
         $color = $schemes['color'];
         $typography = $schemes['typography'];
         $_colors = apack_make_variables_array( $color['items'], 'color' );
         $_fonts = apack_make_variables_array( $typography['items'], 'font' );
-
+    
         ?>
         <style>
             :root {
-                <?php foreach( $_colors as $index => $c ) : ?>
-                <?php echo "{$c['name']}: {$c['value']};"; ?>
+                <?php foreach( $_colors as $c ) : ?>
+                    <?php 
+                    if( isset( $c['name'], $c['value'] ) ) {
+                        echo esc_html( $c['name'] ) . ': ' . esc_html( $c['value'] ) . ';'; 
+                    }
+                    ?>
                 <?php endforeach; ?>
-
-                <?php foreach( $_fonts as $index => $f ) : ?>
-                <?php echo "{$f['name']}: '{$f['value']['font_family']}';"; ?>
-                <?php echo "{$f['name']}-weight: {$f['value']['font_weight']};"; ?>
+    
+                <?php foreach( $_fonts as $f ) : ?>
+                    <?php 
+                    if( isset( $f['name'], $f['value']['font_family'], $f['value']['font_weight'] ) ) {
+                        echo esc_html( $f['name'] ) . ': \'' . esc_html( $f['value']['font_family'] ) . '\';';
+                        echo esc_html( $f['name'] ) . '-weight: ' . esc_html( $f['value']['font_weight'] ) . ';'; 
+                    }
+                    ?>
                 <?php endforeach; ?>
             }
         </style>
         <?php
     }
+
 
     add_action( 'wp_head', 'apack_elementor_scheme_variables', 6 );
 }
